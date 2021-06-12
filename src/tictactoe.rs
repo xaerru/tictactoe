@@ -1,3 +1,6 @@
+mod constants;
+
+use constants::{HASH, O, X};
 use rand::seq::SliceRandom;
 use tui::{
     style::{Color, Modifier, Style},
@@ -11,36 +14,6 @@ pub struct TicTacToe {
     pub rows: Vec<String>,
     pub turn: char,
 }
-
-pub static O: &str = r#"
-▀███▀   ▀██▀ 
-  ███▄  ▄█   
-   ▀██▄█▀    
-     ███     
-   ▄█▀▀██▄   
-  ▄█   ▀██▄  
-▄██▄▄  ▄▄███▄
-"#;
-
-pub static X: &str = r#"
- ▄▄█▀▀██▄  
-▄██▀    ▀██▄
-██▀      ▀██
-██        ██
-██▄      ▄██
-▀██▄    ▄██▀
-  ▀▀████▀▀  
-"#;
-
-pub static HASH: &str = r#"
-    ▄█▀ ██ 
-    ██ ▄█▀ 
- █████████ 
-   ██ ██   
-██████████ 
- ▄█▀ ██    
- ██ ▄█▀    
-"#;
 
 impl TicTacToe {
     pub fn new() -> TicTacToe {
