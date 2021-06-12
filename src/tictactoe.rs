@@ -1,7 +1,8 @@
 mod constants;
-
+use crate::tictactoe::constants::*;
 use constants::{HASH, O, X};
 use rand::seq::SliceRandom;
+use std::collections::HashMap;
 use tui::{
     style::{Color, Modifier, Style},
     text::{Span, Spans},
@@ -144,6 +145,71 @@ impl TicTacToe {
             })
         } else {
             None
+        }
+    }
+    pub fn pretty_num(&mut self, num: i32, typ: char) -> Vec<Spans> {
+        let color = if typ == 'X' {
+            Color::Rgb(191, 97, 106)
+        } else {
+            Color::Rgb(143, 188, 187)
+        };
+        let map: HashMap<u32, &str> = [
+            (0, n0),
+            (1, n1),
+            (2, n2),
+            (3, n3),
+            (4, n4),
+            (5, n5),
+            (6, n6),
+            (7, n7),
+            (8, n8),
+            (9, n9),
+        ]
+        .iter()
+        .cloned()
+        .collect();
+        if num < 10 {
+            map[&(num as u32)]
+                .lines()
+                .map(|f| {
+                    Spans::from(Span::styled(
+                        f,
+                        Style::default().fg(color).add_modifier(Modifier::BOLD),
+                    ))
+                })
+                .collect()
+        } else {
+            let d1 = map[&num
+                .to_string()
+                .chars()
+                .nth(0)
+                .unwrap()
+                .to_digit(10)
+                .unwrap()]
+                .split('\n')
+                .collect::<Vec<&str>>();
+            let d2 = map[&num
+                .to_string()
+                .chars()
+                .nth(1)
+                .unwrap()
+                .to_digit(10)
+                .unwrap()]
+                .split('\n')
+                .collect::<Vec<&str>>();
+            let mut res: Vec<String> = Vec::new();
+            for (x, y) in d1.iter().zip(d2) {
+                res.push(format!("{}{}", x, y))
+            }
+            res.join("\n")
+                .lines()
+                .map(|f| {
+                    Spans::from(Span::styled(
+                        f.to_string(),
+                        Style::default().fg(color).add_modifier(Modifier::BOLD),
+                    ))
+                })
+                .collect()
         }
     }
 }

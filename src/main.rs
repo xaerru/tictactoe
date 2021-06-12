@@ -1,3 +1,4 @@
+#[allow(non_upper_case_globals)]
 mod tictactoe;
 use crossterm::{
     self, cursor,
@@ -12,7 +13,7 @@ use tui::{backend::CrosstermBackend, widgets::BorderType};
 use tui::{
     layout::{Constraint, Direction, Layout},
     style::{Color, Modifier, Style},
-    text::{Span, Spans},
+    text::Span,
     widgets::{Block, Borders, Paragraph},
 };
 
@@ -95,20 +96,20 @@ fn main() -> crossterm::Result<()> {
                 }
             }
 
-            let x: Paragraph = Paragraph::new(Spans::from(x_score.to_string()))
+            let x: Paragraph = Paragraph::new(game.pretty_num(x_score, 'X'))
                 .block(
                     Block::default()
-                        .title("X")
+                        .title("X Score")
                         .borders(Borders::all())
                         .border_style(Style::default().fg(Color::Rgb(129, 161, 193)))
                         .border_type(BorderType::Rounded),
                 )
                 .alignment(Alignment::Center);
             f.render_widget(x, bottom[0]);
-            let o: Paragraph = Paragraph::new(Spans::from(o_score.to_string()))
+            let o: Paragraph = Paragraph::new(game.pretty_num(o_score, 'O'))
                 .block(
                     Block::default()
-                        .title("O")
+                        .title("O Score")
                         .borders(Borders::all())
                         .border_style(Style::default().fg(Color::Rgb(129, 161, 193)))
                         .border_type(BorderType::Rounded),
@@ -160,6 +161,30 @@ fn main() -> crossterm::Result<()> {
                 }
             }
             _ => {}
+        }
+
+        if x_score > 99 {
+            terminal.clear()?;
+            terminal::disable_raw_mode()?;
+            execute!(
+                io::stdout(),
+                cursor::RestorePosition,
+                cursor::Show,
+                terminal::LeaveAlternateScreen,
+            )?;
+            println!("X WON!");
+            break;
+        } else if o_score > 99 {
+            terminal.clear()?;
+            terminal::disable_raw_mode()?;
+            execute!(
+                io::stdout(),
+                cursor::RestorePosition,
+                cursor::Show,
+                terminal::LeaveAlternateScreen,
+            )?;
+            println!("O WON!");
+            break;
         }
     }
     Ok(())
