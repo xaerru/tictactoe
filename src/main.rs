@@ -22,8 +22,14 @@ fn main() -> crossterm::Result<()> {
     let backend = CrosstermBackend::new(stdout);
     let mut terminal = Terminal::new(backend)?;
 
-    terminal.clear()?;
     terminal::enable_raw_mode()?;
+
+    execute!(
+        io::stdout(),
+        cursor::Hide,
+        cursor::SavePosition,
+        terminal::EnterAlternateScreen
+    )?;
 
     let mut game = TicTacToe::new();
 
