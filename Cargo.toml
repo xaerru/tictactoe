@@ -1,6 +1,6 @@
 [package]
 name = "tuitactoe"
-version = "0.1.1"
+version = "0.1.2"
 authors = ["grvxs <gauravsinghsisodia5@gmail.com>"]
 edition = "2018"
 description = "TicTacToe in your terminal."
