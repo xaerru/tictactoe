@@ -5,7 +5,7 @@ authors = ["grvxs <gauravsinghsisodia5@gmail.com>"]
 edition = "2018"
 description = "TicTacToe in your terminal."
 keywords = ["tui", "tictactoe", "game"]
-repository = "https://github.com/grvxs/tuitactoe"
+repository = "https://github.com/grvxs/tictactoe"
 license = "Apache-2.0"
 readme = "./README.md"
 
