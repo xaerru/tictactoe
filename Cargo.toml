@@ -1,12 +1,12 @@
 [package]
 name = "tictactoe"
-version = "0.1.3"
+version = "0.1.4"
 authors = ["grvxs <gauravsinghsisodia5@gmail.com>"]
 edition = "2018"
 description = "TicTacToe in your terminal."
 keywords = ["tui", "tictactoe", "game"]
 repository = "https://github.com/grvxs/tictactoe"
-license = "Apache-2.0"
+license = "GPL-3.0"
 readme = "./README.md"
 
 [dependencies]
